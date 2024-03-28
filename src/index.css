@@ -1,0 +1,11 @@
+body {
+  background: rgb(241, 240, 244);
+}
+
+.mainPage {
+  text-align: center;
+  margin: 0 auto;
+  width: 90vw;
+  max-width: 1120px;
+  padding: 5rem 2rem;
+}
