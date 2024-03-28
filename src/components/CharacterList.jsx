@@ -10,8 +10,6 @@ const CharacterList = ({ characters }) => {
     const origin = character.origin.name;
     const location = character.location.name;
 
-    // console.log(id, image, name, species, origin, location);
-
     return {
       id: id,
       image: image,

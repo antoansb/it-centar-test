@@ -1,26 +1,34 @@
+import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useLoaderData } from 'react-router-dom';
 
 import CharacterList from '../components/CharacterList';
 import SearchForm from '../components/SearchForm';
 
-const charactersURL = 'https://rickandmortyapi.com/api/character';
-
-export const loader = async ({ request }) => {
-  const url = new URL(request.url);
-
-  const searchWord = url.searchParams.get('name') || '';
-
-  const response = await axios.get(`${charactersURL}${searchWord}`);
-  return { characters: response.data.results, searchWord };
-};
-
 const MainPage = () => {
-  const { characters, searchWord } = useLoaderData();
-  // console.log(characters);
+  const [characters, setCharacters] = useState([]);
+  const [searchWord, setSearchWord] = useState('');
+  const [pageNumber, setPageNumber] = useState(1);
+
+  const charactersURL = `https://rickandmortyapi.com/api/character/?name=${searchWord}`;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data } = await axios.get(charactersURL);
+        setCharacters(data.results);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    const delayFunction = setTimeout(() => {
+      fetchData();
+    }, 1000);
+    return () => clearTimeout(delayFunction);
+  }, [searchWord]);
+
   return (
     <>
-      <SearchForm searchWord={searchWord} />
+      <SearchForm searchWord={searchWord} setSearchWord={setSearchWord} />
       <CharacterList characters={characters} />
     </>
   );

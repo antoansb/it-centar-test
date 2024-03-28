@@ -1,17 +1,15 @@
 import { Form } from 'react-router-dom';
-import { CiSearch } from 'react-icons/ci';
 
-const SearchForm = ({ searchWord }) => {
+const SearchForm = ({ searchWord, setSearchWord }) => {
   return (
     <Form className="form">
       <input
         type="search"
-        name="name"
         className="form-input"
         placeholder="Search characters..."
-        defaultValue={searchWord}
+        value={searchWord}
+        onChange={(event) => setSearchWord(event.target.value)}
       />
-      {/* <button type="submit">search</button> */}
     </Form>
   );
 };

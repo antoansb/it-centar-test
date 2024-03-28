@@ -8,22 +8,20 @@ const Character = ({ id, image, name, species, origin, location }) => {
           <img src={image} alt="character-image" className="character-image" />
         </Link>
         <div className="character-profile">
-          {/* <Link to={`/character/${id}`}> */}
           <h3>{name}</h3>
-          {/* </Link> */}
           <div className="characteristics">
-            <p className="characteristic">
+            <span className="characteristic">
               Species
               <p className="characteristic-data">{species}</p>
-            </p>
-            <p className="characteristic">
+            </span>
+            <span className="characteristic">
               Origin
               <p className="characteristic-data">{origin}</p>
-            </p>
-            <p className="characteristic">
+            </span>
+            <span className="characteristic">
               Location
               <p className="characteristic-data">{location}</p>
-            </p>
+            </span>
           </div>
         </div>
       </div>
