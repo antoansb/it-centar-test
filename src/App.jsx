@@ -3,6 +3,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { HomeLayout, MainPage, Character } from './pages';
 
 import { loader as mainPageLoader } from './pages/MainPage';
+import { loader as characterLoader } from './pages/Character';
 
 const router = createBrowserRouter([
   {
@@ -15,8 +16,9 @@ const router = createBrowserRouter([
         loader: mainPageLoader,
       },
       {
-        path: 'character',
+        path: 'character/:id',
         element: <Character />,
+        loader: characterLoader,
       },
     ],
   },

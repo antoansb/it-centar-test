@@ -1,16 +1,28 @@
 import axios from 'axios';
 import { useLoaderData } from 'react-router-dom';
 
-const URL = 'https://rickandmortyapi.com/api/character';
+import CharacterList from '../components/CharacterList';
+import SearchForm from '../components/SearchForm';
 
-export const loader = async () => {
-  const response = await axios.get(`${URL}`);
-  return { characters: response.data };
+const charactersURL = 'https://rickandmortyapi.com/api/character';
+
+export const loader = async ({ request }) => {
+  const url = new URL(request.url);
+
+  const searchWord = url.searchParams.get('name') || '';
+
+  const response = await axios.get(`${charactersURL}${searchWord}`);
+  return { characters: response.data.results, searchWord };
 };
 
 const MainPage = () => {
-  const { characters } = useLoaderData();
-  console.log(characters);
-  return <h2>MainPage</h2>;
+  const { characters, searchWord } = useLoaderData();
+  // console.log(characters);
+  return (
+    <>
+      <SearchForm searchWord={searchWord} />
+      <CharacterList characters={characters} />
+    </>
+  );
 };
 export default MainPage;
